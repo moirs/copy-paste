@@ -1,0 +1,133 @@
+Azure.Identity.CredentialUnavailableException: DefaultAzureCredential failed to retrieve a token from the included credentials. See the troubleshooting guide for more information. https://aka.ms/azsdk/net/identity/defaultazurecredential/troubleshoot
+- EnvironmentCredential authentication unavailable. Environment variables are not fully configured. See the troubleshooting guide for more information. https://aka.ms/azsdk/net/identity/environmentcredential/troubleshoot
+- WorkloadIdentityCredential authentication unavailable. The workload options are not fully configured. See the troubleshooting guide for more information. https://aka.ms/azsdk/net/identity/workloadidentitycredential/troubleshoot
+- ManagedIdentityCredential authentication unavailable. The requested identity has not been assigned to this resource.
+Status: 400 (Bad Request)
+
+Content:
+{"error":"invalid_request","error_description":"Multiple user assigned identities exist, please specify the clientId / resourceId of the identity in the token request"}
+
+Headers:
+Server: IMDS/150.870.65.1520
+x-ms-request-id: 1655bf7f-30d5-4d7b-afa7-030c99e3df30
+Date: Tue, 03 Dec 2024 11:09:18 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 168
+
+- Visual Studio Token provider can't be accessed at /root/.IdentityService/AzureServiceAuth/tokenprovider.json
+- Azure CLI not installed
+- PowerShell is not installed.
+- Azure Developer CLI could not be found.
+ ---> System.AggregateException: Multiple exceptions were encountered while attempting to authenticate. (EnvironmentCredential authentication unavailable. Environment variables are not fully configured. See the troubleshooting guide for more information. https://aka.ms/azsdk/net/identity/environmentcredential/troubleshoot) (WorkloadIdentityCredential authentication unavailable. The workload options are not fully configured. See the troubleshooting guide for more information. https://aka.ms/azsdk/net/identity/workloadidentitycredential/troubleshoot) (ManagedIdentityCredential authentication unavailable. The requested identity has not been assigned to this resource.
+Status: 400 (Bad Request)
+
+Content:
+{"error":"invalid_request","error_description":"Multiple user assigned identities exist, please specify the clientId / resourceId of the identity in the token request"}
+
+Headers:
+Server: IMDS/150.870.65.1520
+x-ms-request-id: 1655bf7f-30d5-4d7b-afa7-030c99e3df30
+Date: Tue, 03 Dec 2024 11:09:18 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 168
+) (Visual Studio Token provider can't be accessed at /root/.IdentityService/AzureServiceAuth/tokenprovider.json) (Azure CLI not installed) (PowerShell is not installed.) (Azure Developer CLI could not be found.)
+ ---> Azure.Identity.CredentialUnavailableException: EnvironmentCredential authentication unavailable. Environment variables are not fully configured. See the troubleshooting guide for more information. https://aka.ms/azsdk/net/identity/environmentcredential/troubleshoot
+   at Azure.Identity.CredentialDiagnosticScope.FailWrapAndThrow(Exception ex, String additionalMessage, Boolean isCredentialUnavailable)
+   at Azure.Identity.EnvironmentCredential.GetTokenImplAsync(Boolean async, TokenRequestContext requestContext, CancellationToken cancellationToken)
+   at Azure.Identity.EnvironmentCredential.GetTokenAsync(TokenRequestContext requestContext, CancellationToken cancellationToken)
+   at Azure.Identity.DefaultAzureCredential.GetTokenFromSourcesAsync(TokenCredential[] sources, TokenRequestContext requestContext, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+ ---> (Inner Exception #1) Azure.Identity.CredentialUnavailableException: WorkloadIdentityCredential authentication unavailable. The workload options are not fully configured. See the troubleshooting guide for more information. https://aka.ms/azsdk/net/identity/workloadidentitycredential/troubleshoot
+   at Azure.Identity.WorkloadIdentityCredential.GetTokenCoreAsync(Boolean async, TokenRequestContext requestContext, CancellationToken cancellationToken)
+   at Azure.Identity.CredentialDiagnosticScope.FailWrapAndThrow(Exception ex, String additionalMessage, Boolean isCredentialUnavailable)
+   at Azure.Identity.WorkloadIdentityCredential.GetTokenCoreAsync(Boolean async, TokenRequestContext requestContext, CancellationToken cancellationToken)
+   at Azure.Identity.WorkloadIdentityCredential.GetTokenAsync(TokenRequestContext requestContext, CancellationToken cancellationToken)
+   at Azure.Identity.DefaultAzureCredential.GetTokenFromSourcesAsync(TokenCredential[] sources, TokenRequestContext requestContext, Boolean async, CancellationToken cancellationToken)<---
+
+ ---> (Inner Exception #2) Azure.Identity.CredentialUnavailableException: ManagedIdentityCredential authentication unavailable. The requested identity has not been assigned to this resource.
+Status: 400 (Bad Request)
+
+Content:
+{"error":"invalid_request","error_description":"Multiple user assigned identities exist, please specify the clientId / resourceId of the identity in the token request"}
+
+Headers:
+Server: IMDS/150.870.65.1520
+x-ms-request-id: 1655bf7f-30d5-4d7b-afa7-030c99e3df30
+Date: Tue, 03 Dec 2024 11:09:18 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 168
+
+   at Azure.Identity.ImdsManagedIdentitySource.HandleResponseAsync(Boolean async, TokenRequestContext context, HttpMessage message, CancellationToken cancellationToken)
+   at Azure.Identity.ManagedIdentitySource.AuthenticateAsync(Boolean async, TokenRequestContext context, CancellationToken cancellationToken)
+   at Azure.Identity.ImdsManagedIdentitySource.AuthenticateAsync(Boolean async, TokenRequestContext context, CancellationToken cancellationToken)
+   at Azure.Identity.ManagedIdentityClient.AuthenticateCoreAsync(Boolean async, TokenRequestContext context, CancellationToken cancellationToken)
+   at Azure.Identity.ManagedIdentityClient.AppTokenProviderImpl(AppTokenProviderParameters parameters)
+   at Microsoft.Identity.Client.Internal.Requests.ClientCredentialRequest.SendTokenRequestToAppTokenProviderAsync(ILoggerAdapter logger, CancellationToken cancellationToken)
+   at Microsoft.Identity.Client.Internal.Requests.ClientCredentialRequest.GetAccessTokenAsync(CancellationToken cancellationToken, ILoggerAdapter logger)
+   at Microsoft.Identity.Client.Internal.Requests.ClientCredentialRequest.ExecuteAsync(CancellationToken cancellationToken)
+   at Microsoft.Identity.Client.Internal.Requests.RequestBase.<>c__DisplayClass11_1.<<RunAsync>b__1>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.Identity.Client.Utils.StopwatchService.MeasureCodeBlockAsync(Func`1 codeBlock)
+   at Microsoft.Identity.Client.Internal.Requests.RequestBase.RunAsync(CancellationToken cancellationToken)
+   at Microsoft.Identity.Client.ApiConfig.Executors.ConfidentialClientExecutor.ExecuteAsync(AcquireTokenCommonParameters commonParameters, AcquireTokenForClientParameters clientParameters, CancellationToken cancellationToken)
+   at Azure.Identity.AbstractAcquireTokenParameterBuilderExtensions.ExecuteAsync[T](AbstractAcquireTokenParameterBuilder`1 builder, Boolean async, CancellationToken cancellationToken)
+   at Azure.Identity.MsalConfidentialClient.AcquireTokenForClientCoreAsync(String[] scopes, String tenantId, String claims, Boolean enableCae, Boolean async, CancellationToken cancellationToken)
+   at Azure.Identity.MsalConfidentialClient.AcquireTokenForClientAsync(String[] scopes, String tenantId, String claims, Boolean enableCae, Boolean async, CancellationToken cancellationToken)
+   at Azure.Identity.ManagedIdentityClient.AuthenticateAsync(Boolean async, TokenRequestContext context, CancellationToken cancellationToken)
+   at Azure.Identity.ManagedIdentityCredential.GetTokenImplAsync(Boolean async, TokenRequestContext requestContext, CancellationToken cancellationToken)
+   at Azure.Identity.CredentialDiagnosticScope.FailWrapAndThrow(Exception ex, String additionalMessage, Boolean isCredentialUnavailable)
+   at Azure.Identity.ManagedIdentityCredential.GetTokenImplAsync(Boolean async, TokenRequestContext requestContext, CancellationToken cancellationToken)
+   at Azure.Identity.ManagedIdentityCredential.GetTokenAsync(TokenRequestContext requestContext, CancellationToken cancellationToken)
+   at Azure.Identity.DefaultAzureCredential.GetTokenFromSourcesAsync(TokenCredential[] sources, TokenRequestContext requestContext, Boolean async, CancellationToken cancellationToken)<---
+
+ ---> (Inner Exception #3) Azure.Identity.CredentialUnavailableException: Visual Studio Token provider can't be accessed at /root/.IdentityService/AzureServiceAuth/tokenprovider.json
+ ---> System.IO.DirectoryNotFoundException: Could not find a part of the path '/root/.IdentityService/AzureServiceAuth/tokenprovider.json'.
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.StreamReader.ValidateArgsAndOpenPath(String path, Encoding encoding, Int32 bufferSize)
+   at System.IO.File.ReadAllText(String path, Encoding encoding)
+   at Azure.Identity.FileSystemService.ReadAllText(String path)
+   at Azure.Identity.VisualStudioCredential.GetTokenProviderContent(String tokenProviderPath)
+   --- End of inner exception stack trace ---
+   at Azure.Identity.VisualStudioCredential.GetTokenProviderContent(String tokenProviderPath)
+   at Azure.Identity.VisualStudioCredential.GetTokenProviders(String tokenProviderPath)
+   at Azure.Identity.VisualStudioCredential.GetTokenImplAsync(TokenRequestContext requestContext, Boolean async, CancellationToken cancellationToken)
+   at Azure.Identity.CredentialDiagnosticScope.FailWrapAndThrow(Exception ex, String additionalMessage, Boolean isCredentialUnavailable)
+   at Azure.Identity.VisualStudioCredential.GetTokenImplAsync(TokenRequestContext requestContext, Boolean async, CancellationToken cancellationToken)
+   at Azure.Identity.VisualStudioCredential.GetTokenAsync(TokenRequestContext requestContext, CancellationToken cancellationToken)
+   at Azure.Identity.DefaultAzureCredential.GetTokenFromSourcesAsync(TokenCredential[] sources, TokenRequestContext requestContext, Boolean async, CancellationToken cancellationToken)<---
+
+ ---> (Inner Exception #4) Azure.Identity.CredentialUnavailableException: Azure CLI not installed
+   at Azure.Identity.AzureCliCredential.RequestCliAccessTokenAsync(Boolean async, TokenRequestContext context, CancellationToken cancellationToken)
+   at Azure.Identity.AzureCliCredential.GetTokenImplAsync(Boolean async, TokenRequestContext requestContext, CancellationToken cancellationToken)
+   at Azure.Identity.CredentialDiagnosticScope.FailWrapAndThrow(Exception ex, String additionalMessage, Boolean isCredentialUnavailable)
+   at Azure.Identity.AzureCliCredential.GetTokenImplAsync(Boolean async, TokenRequestContext requestContext, CancellationToken cancellationToken)
+   at Azure.Identity.AzureCliCredential.GetTokenAsync(TokenRequestContext requestContext, CancellationToken cancellationToken)
+   at Azure.Identity.DefaultAzureCredential.GetTokenFromSourcesAsync(TokenCredential[] sources, TokenRequestContext requestContext, Boolean async, CancellationToken cancellationToken)<---
+
+ ---> (Inner Exception #5) Azure.Identity.CredentialUnavailableException: PowerShell is not installed.
+   at Azure.Identity.AzurePowerShellCredential.CheckForErrors(String output, Int32 exitCode)
+   at Azure.Identity.AzurePowerShellCredential.RequestAzurePowerShellAccessTokenAsync(Boolean async, TokenRequestContext context, CancellationToken cancellationToken)
+   at Azure.Identity.AzurePowerShellCredential.GetTokenImplAsync(Boolean async, TokenRequestContext requestContext, CancellationToken cancellationToken)
+   at Azure.Identity.CredentialDiagnosticScope.FailWrapAndThrow(Exception ex, String additionalMessage, Boolean isCredentialUnavailable)
+   at Azure.Identity.AzurePowerShellCredential.GetTokenImplAsync(Boolean async, TokenRequestContext requestContext, CancellationToken cancellationToken)
+   at Azure.Identity.AzurePowerShellCredential.GetTokenAsync(TokenRequestContext requestContext, CancellationToken cancellationToken)
+   at Azure.Identity.DefaultAzureCredential.GetTokenFromSourcesAsync(TokenCredential[] sources, TokenRequestContext requestContext, Boolean async, CancellationToken cancellationToken)<---
+
+ ---> (Inner Exception #6) Azure.Identity.CredentialUnavailableException: Azure Developer CLI could not be found.
+   at Azure.Identity.AzureDeveloperCliCredential.RequestCliAccessTokenAsync(Boolean async, TokenRequestContext context, CancellationToken cancellationToken)
+   at Azure.Identity.AzureDeveloperCliCredential.GetTokenImplAsync(Boolean async, TokenRequestContext requestContext, CancellationToken cancellationToken)
+   at Azure.Identity.CredentialDiagnosticScope.FailWrapAndThrow(Exception ex, String additionalMessage, Boolean isCredentialUnavailable)
+   at Azure.Identity.AzureDeveloperCliCredential.GetTokenImplAsync(Boolean async, TokenRequestContext requestContext, CancellationToken cancellationToken)
+   at Azure.Identity.AzureDeveloperCliCredential.GetTokenAsync(TokenRequestContext requestContext, CancellationToken cancellationToken)
+   at Azure.Identity.DefaultAzureCredential.GetTokenFromSourcesAsync(TokenCredential[] sources, TokenRequestContext requestContext, Boolean async, CancellationToken cancellationToken)<---
+
+   --- End of inner exception stack trace ---
+   at Azure.Identity.DefaultAzureCredential.GetTokenFromSourcesAsync(TokenCredential[] sources, TokenRequestContext requestContext, Boolean async, CancellationToken cancellationToken)
+   at Azure.Identity.DefaultAzureCredential.GetTokenImplAsync(Boolean async, TokenRequestContext requestContext, CancellationToken cancellationToken)
+   at Azure.Identity.CredentialDiagnosticScope.FailWrapAndThrow(Exception ex, String additionalMessage, Boolean isCredentialUnavailable)
+   at Azure.Identity.DefaultAzureCredential.GetTokenImplAsync(Boolean async, TokenRequestContext requestContext, CancellationToken cancellationToken)
+   at Azure.Identity.DefaultAzureCredential.GetTokenAsync(TokenRequestContext requestContext, CancellationToken cancellationToken)
+   at foo.Home.Services.ApplicationService.TestDbConnectivity() in /src/foo/Home/Services/ApplicationService.cs:line 68
